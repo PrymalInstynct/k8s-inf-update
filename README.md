@@ -72,7 +72,7 @@ Example Playbook
 
 ```yaml
 ---
-- name: Update Kubernetes Infrastructure Hosts and performing a rolling reboot
+- name: Update Kubernetes Infrastructure Nodes & Perform a rolling reboot
   hosts: all
   serial: 1
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"

@@ -6,6 +6,8 @@ This role will apply Operating System patches to your k8s infrastructure nodes u
 Requirements
 ------------
 
+A Kubernetes Cluster running on a Fedora, Red Hat, or Ubuntu based distrobution
+
 ### Collections
 
   - kubernetes.core

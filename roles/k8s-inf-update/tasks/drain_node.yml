@@ -1,0 +1,19 @@
+---
+- name: "Cordon {{ inventory_hostname }}"
+  kubernetes.core.k8s_drain:
+    kubeconfig: "{{ kubeconfig_location }}"
+    state: cordon
+    name: "{{ inventory_hostname }}"
+  delegate_to: localhost
+
+- name: "Drain {{ inventory_hostname }}"
+  kubernetes.core.k8s_drain:
+    kubeconfig: "{{ kubeconfig_location }}"
+    state: drain
+    name: "{{ inventory_hostname }}"
+    delete_options:
+      delete_emptydir_data: "{{ drain_delete_emptydir_data }}"
+      ignore_daemonsets: "{{ drain_ignore_daemonsets }}"
+      terminate_grace_period: "{{ drain_terminate_grace_period }}"
+      wait_timeout: "{{ drain_wait_timeout }}"
+  delegate_to: localhost

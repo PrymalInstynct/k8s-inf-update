@@ -1,0 +1,24 @@
+---
+- name: "Update all DNF packages on {{ inventory_hostname }}"
+  ansible.builtin.dnf:
+    name: "*"
+    state: latest
+    update_cache: true
+
+- name: Verify need-restarting command is present
+  ansible.builtin.dnf:
+    name: dnf-utils
+    state: present
+
+- name: Check if reboot is required
+  ansible.builtin.command: /usr/bin/needs-restarting -r
+  register: reboot_required
+  changed_when: reboot_required.rc == 1
+  failed_when:
+    - not reboot_required.rc == 0
+    - not reboot_required.rc == 1
+
+- name: "Reboot {{ inventory_hostname }}"
+  ansible.builtin.reboot:
+    post_reboot_delay: 30
+  when: reboot_required.rc == 1

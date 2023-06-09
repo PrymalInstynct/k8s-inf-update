@@ -1,0 +1,6 @@
+---
+kubeconfig_location: ~/.kube/config
+drain_delete_emptydir_data: true
+drain_ignore_daemonsets: true
+drain_terminate_grace_period: 60
+drain_wait_timeout: 120

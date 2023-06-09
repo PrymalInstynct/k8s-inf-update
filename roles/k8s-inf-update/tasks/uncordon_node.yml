@@ -1,0 +1,11 @@
+---
+- name: "Uncordon {{ inventory_hostname }}"
+  kubernetes.core.k8s_drain:
+    kubeconfig: "{{ kubeconfig_location }}"
+    state: uncordon
+    name: "{{ inventory_hostname }}"
+  delegate_to: localhost
+
+- name: "Wait before completing tasks on {{ inventory_hostname }}"
+  ansible.builtin.pause:
+    minutes: 2

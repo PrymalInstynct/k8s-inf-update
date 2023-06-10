@@ -1,7 +1,7 @@
 K8s Infrastructure Update
 =========================
 
-This role will apply Operating System patches to your k8s infrastructure nodes using a rolling methodology to ensure the k8s cluster remains active. You can include multiple clusters in your inventory supplying a different kubeconfig as a variable for each of the clusters.
+This Ansible role will apply Operating System patches to your k8s infrastructure nodes using a rolling methodology to ensure the k8s cluster remains active. You can include multiple clusters in your inventory supplying a different kubeconfig as a variable for each of the clusters.
 
 Requirements
 ------------

@@ -4,3 +4,5 @@ drain_delete_emptydir_data: true
 drain_ignore_daemonsets: true
 drain_terminate_grace_period: 60
 drain_wait_timeout: 120
+discord_webhook_id: "{{ vault_discord_webhook_id }}"
+discord_webhook_token: "{{ vault_discord_webhook_token }}"

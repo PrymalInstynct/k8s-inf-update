@@ -1,0 +1,20 @@
+---
+- name: "Send Notification to Discord that {{ inventory_hostname }} was Rebooted"
+  community.general.discord:
+    webhook_id: "{{ discord_webhook_id }}"
+    webhook_token: "{{ discord_webhook_token }}"
+    embeds:
+      - title: "✅ {{ inventory_hostname }} was rebooted ✅"
+        color: 65280
+        fields:
+          - name: Hostname
+            value: "{{ inventory_hostname }}"
+          - name: IP Address
+            value: "{{ ansible_host }}"
+  when:
+    - ansible_distribution == 'Fedora'
+    - reboot_required.rc == 1 or
+      ansible_distribution == 'RedHat'
+    - reboot_required.rc == 1 or
+      ansible_distribution == 'Ubuntu'
+    - reboot_required.stat.exists

@@ -10,11 +10,13 @@ A Kubernetes Cluster running on a Fedora, Red Hat, or Ubuntu based distrobution
 
 ### Collections
 
+  - community.general
   - kubernetes.core
 
 Role Variables
 --------------
 
+### defaults/main.yml
 ```yaml
 ---
 kubeconfig_location: ~/.kube/config
@@ -22,6 +24,17 @@ drain_delete_emptydir_data: true
 drain_ignore_daemonsets: true
 drain_terminate_grace_period: 60
 drain_wait_timeout: 120
+discord_webhook_id: "{{ vault_discord_webhook_id }}"
+discord_webhook_token: "{{ vault_discord_webhook_token }}"
+
+```
+
+### vars/vault.yml
+```yaml
+---
+vault_discord_webhook_id: 0000000000000
+vault_discord_webhook_token: xxxxxxxxxxxxxxxx
+
 ```
 
 Example Inventory
@@ -68,7 +81,7 @@ dev_kubernetes:
 Example Playbook
 ----------------
 
-`ansible-playbook -i inventory.yml playbooks/update-k8s-infrastructure.yml `
+`ansible-playbook -i inventory.yml playbooks/update-k8s-infrastructure.yml -K --ask-vault-pass`
 
 ```yaml
 ---

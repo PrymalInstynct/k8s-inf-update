@@ -81,7 +81,7 @@ dev_kubernetes:
 Example Playbook
 ----------------
 
-`ansible-playbook -i inventory.yml playbooks/update-k8s-infrastructure.yml -K --ask-vault-pass`
+`ansible-playbook -i inventory.yml update-k8s-infrastructure.yml -K --ask-vault-pass`
 
 ```yaml
 ---

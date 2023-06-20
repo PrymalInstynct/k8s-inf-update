@@ -12,9 +12,4 @@
           - name: IP Address
             value: "{{ ansible_host }}"
   when:
-    - ansible_distribution == 'Fedora'
-    - reboot_required.rc == 1 or
-      ansible_distribution == 'RedHat'
-    - reboot_required.rc == 1 or
-      ansible_distribution == 'Ubuntu'
-    - reboot_required.stat.exists
+    - reboot_required.changed

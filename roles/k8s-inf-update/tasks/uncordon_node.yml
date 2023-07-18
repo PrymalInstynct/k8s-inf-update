@@ -8,4 +8,4 @@
 
 - name: "Wait before completing tasks on {{ inventory_hostname }}"
   ansible.builtin.pause:
-    minutes: 10
+    minutes: 2

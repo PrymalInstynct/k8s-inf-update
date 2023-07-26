@@ -25,6 +25,6 @@
 #   delegate_to: localhost
 
 - name: "Drain {{ inventory_hostname }}"
-  ansible.builtin.command: "kubectl --kubeconfig={{ kubeconfig_location }} drain --pod-selector='app!=rook-ceph-osd,app!=csi-attacher,app!=csi-provisioner' --ignore-daemonsets --delete-emptydir-data --force --grace-period=300 {{ inventory_hostname }}"
+  ansible.builtin.command: "kubectl --kubeconfig={{ kubeconfig_location }} drain --pod-selector='app!=rook-ceph-osd,app!=csi-attacher,app!=csi-provisioner',cnpg.io/cluster!=postgres --ignore-daemonsets --delete-emptydir-data --force --grace-period=300 {{ inventory_hostname }}"
   delegate_to: localhost
   changed_when: false

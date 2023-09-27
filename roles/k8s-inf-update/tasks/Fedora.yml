@@ -39,15 +39,7 @@
   when:
     - not dnf_results.changed
 
-- name: Check if a Reboot is Required
-  ansible.builtin.command: /usr/bin/needs-restarting -r
-  register: reboot_required
-  changed_when: reboot_required.rc == 1
-  failed_when:
-    - not reboot_required.rc == 0
-    - not reboot_required.rc == 1
-
 - name: "Reboot {{ inventory_hostname }}"
   ansible.builtin.reboot:
     post_reboot_delay: 30
-  when: reboot_required.rc == 1
+  register: rebooted

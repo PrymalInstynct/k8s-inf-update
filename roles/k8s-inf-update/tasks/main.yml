@@ -6,7 +6,7 @@
   ansible.builtin.dnf:
     name: dnf-utils
     state: present
-  become: yes
+  become: true
   when:
     - ansible_distribution == 'Fedora' or
       ansible_distribution == 'RedHat'
@@ -18,7 +18,7 @@
   ansible.builtin.include_tasks: "{{ ansible_distribution }}.yml"
   args:
     apply:
-      become: yes
+      become: true
 
 - name: Notify Discord
   ansible.builtin.include_tasks: notify_discord.yml

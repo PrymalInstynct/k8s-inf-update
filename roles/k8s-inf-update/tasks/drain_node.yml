@@ -6,25 +6,22 @@
     name: "{{ inventory_hostname }}"
   delegate_to: localhost
 
-# - name: "Drain {{ inventory_hostname }}"
-#   kubernetes.core.k8s_drain:
-#     kubeconfig: "{{ kubeconfig_location }}"
-#     state: drain
-#     name: "{{ inventory_hostname }}"
-#     delete_options:
-#       delete_emptydir_data: "{{ drain_delete_emptydir_data }}"
-#       ignore_daemonsets: "{{ drain_ignore_daemonsets }}"
-#       terminate_grace_period: "{{ drain_terminate_grace_period }}"
-#       wait_timeout: "{{ drain_wait_timeout }}"
-#     pod_selectors:
-#       - app!=rook-ceph-osd
-#   register: drain_results
-#   until: drain_results.changed
-#   retries: 5
-#   delay: 10
-#   delegate_to: localhost
-
 - name: "Drain {{ inventory_hostname }}"
-  ansible.builtin.command: 'kubectl --kubeconfig={{ kubeconfig_location }} drain --pod-selector="app!=rook-ceph-osd,app!=csi-attacher,app!=csi-provisioner",cnpg.io/cluster!=postgres --ignore-daemonsets --delete-emptydir-data --force --grace-period=300 {{ inventory_hostname }}'
+  kubernetes.core.k8s_drain:
+    kubeconfig: "{{ kubeconfig_location }}"
+    state: drain
+    name: "{{ inventory_hostname }}"
+    delete_options:
+      delete_emptydir_data: "{{ drain_delete_emptydir_data }}"
+      ignore_daemonsets: "{{ drain_ignore_daemonsets }}"
+      terminate_grace_period: "{{ drain_terminate_grace_period }}"
+      wait_timeout: "{{ drain_wait_timeout }}"
+    pod_selectors:
+      - app!=rook-ceph-osd
+      - app!=csi-attacher
+      - app!=csi-provisioner
+  register: drain_results
+  until: drain_results.changed
+  retries: 5
+  delay: 10
   delegate_to: localhost
-  changed_when: false

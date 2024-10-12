@@ -20,6 +20,11 @@
       - app!=rook-ceph-osd
       - app!=csi-attacher
       - app!=csi-provisioner
+      - app!=datashim
+      - app!=cilium-agent
+      - app!=cilium-envoy
+      - app!=kube-vip-ds
+      - app!=longhorn     
   register: drain_results
   until: drain_results.changed
   retries: 5

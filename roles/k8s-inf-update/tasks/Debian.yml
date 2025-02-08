@@ -44,4 +44,4 @@
     post_reboot_delay: 30
   register: rebooted
   when:
-    - not apt_results.changed
+    - apt_results.changed

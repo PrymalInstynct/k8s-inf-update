@@ -17,7 +17,9 @@
       terminate_grace_period: "{{ drain_terminate_grace_period }}"
       wait_timeout: "{{ drain_wait_timeout }}"
     pod_selectors:
-      - longhorn.io/component!=instance-manager   
+      - longhorn.io/component!=instance-manager
+      - app!=csi-attacher
+      - app!=csi-provisioner
   register: drain_results
   until: drain_results.changed
   retries: 5

@@ -1,10 +1,10 @@
 ---
-- name: "Cordon {{ inventory_hostname }}"
-  kubernetes.core.k8s_drain:
-    kubeconfig: "{{ kubeconfig_location }}"
-    state: cordon
-    name: "{{ inventory_hostname }}"
-  delegate_to: localhost
+# - name: "Cordon {{ inventory_hostname }}"
+#   kubernetes.core.k8s_drain:
+#     kubeconfig: "{{ kubeconfig_location }}"
+#     state: cordon
+#     name: "{{ inventory_hostname }}"
+#   delegate_to: localhost
 
 - name: "Drain {{ inventory_hostname }}"
   kubernetes.core.k8s_drain:

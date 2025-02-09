@@ -25,6 +25,4 @@ galaxy_info:
     - kubernetes
     - patching
 
-dependencies:
-  - community.general
-  - kubernetes.core
+dependencies: []
